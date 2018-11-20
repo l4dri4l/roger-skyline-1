@@ -1,0 +1,20 @@
+---
+- name: Create firewall rules directory
+  file:
+    path: /etc/firewall
+    state: directory
+
+- name: Set iptables rules
+  copy:
+    src: firewall-enable.sh
+    dest: /etc/firewall/firewall-enable.sh
+
+- name: Set the firewall service
+  copy:
+    src: firewall.service
+    dest: /etc/systemd/system/firewall.service
+
+- name: Set the new IP static
+  template:
+    src: static.network
+    dest: /etc/systemd/network/static.network

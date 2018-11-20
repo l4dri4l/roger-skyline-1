@@ -1,0 +1,7 @@
+[Match]
+Name=ens33
+
+[Network]
+Address={{ ip_address }}/30
+Gateway={{ gateway }}
+DNS=8.8.8.8

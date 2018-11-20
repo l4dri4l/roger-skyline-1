@@ -1,0 +1,5 @@
+---
+- name: Copy wordpress folder
+  synchronize:
+    src: wordpress
+    dest: /var/www

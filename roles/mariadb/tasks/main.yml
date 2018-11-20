@@ -1,0 +1,18 @@
+---
+- name: Install mariadb package
+  apt:
+    name: mariadb-server
+    update_cache: yes
+    state: latest
+
+- name: Start mairadb Service
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+
+- name: Copy database
+  template: src=dump.sql dest=/root/dump.sql
+
+- name: Restore datable
+  shell: mysql -u root < /root/dump.sql
