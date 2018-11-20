@@ -3,3 +3,19 @@
   synchronize:
     src: wordpress
     dest: /var/www
+
+- name: Copy wordpress conf
+  copy:
+    src: wordpress.conf
+    dest: /etc/nginx/sites-available/wordpress
+
+- name: Enable wordpress
+  file:
+    src: /etc/nginx/sites-available/wordpress
+    dest: /etc/nginx/sites-enabled/wordpress
+    state: link
+
+- name: Restart nginx
+  systemd:
+    name: nginx
+    state: restarted
