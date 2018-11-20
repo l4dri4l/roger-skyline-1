@@ -1,0 +1,5 @@
+---
+- name: Copy phpmyadmin folder
+  synchronize:
+    src: phpmyadmin
+    dest: /var/www

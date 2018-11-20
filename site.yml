@@ -9,4 +9,5 @@
   - nginx
   - php-fpm
   - wordpress
+  - phpmyadmin
   - common
