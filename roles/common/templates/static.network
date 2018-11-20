@@ -1,5 +1,5 @@
 [Match]
-Name=ens33
+Name=en*
 
 [Network]
 Address={{ ip_address }}/30
