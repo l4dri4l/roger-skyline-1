@@ -18,3 +18,9 @@
   template:
     src: static.network
     dest: /etc/systemd/network/static.network
+
+- name: Restart network service
+  service:
+    name: systemd-networkd
+    state: started
+    enabled: yes
