@@ -1,8 +1,13 @@
 server {
-    listen 80;
-    listen [::]:80;
-    listen 443 ssl;
-    listen [::]:443 ssl;
+    listen 8080;
+    listen [::]:8080;
+    server_name {{ host_ip_address }};
+    return 302 https://$server_name:4443$request_uri;
+}
+
+server {
+    listen 4443 ssl;
+    listen [::]:4443 ssl;
 
     root /var/www/wordpress;
     index index.php index.html index.htm;

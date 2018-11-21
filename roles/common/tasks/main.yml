@@ -19,7 +19,13 @@
     src: static.network
     dest: /etc/systemd/network/static.network
 
-- name: Restart network service
+- name: Disable network service
+  service:
+    name: systemd-networkd
+    state: stopped
+    enabled: no
+
+- name: Enable systemd-networkd service
   service:
     name: systemd-networkd
     state: started

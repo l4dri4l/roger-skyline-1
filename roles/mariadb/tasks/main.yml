@@ -1,9 +1,13 @@
 ---
 - name: Install mariadb package
   apt:
-    name: mariadb-server
+    name: "{{ packages }}"
     update_cache: yes
     state: latest
+  vars:
+    packages:
+    - mariadb-server
+    - php-mysql
 
 - name: Start mairadb Service
   service:

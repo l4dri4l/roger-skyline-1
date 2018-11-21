@@ -4,9 +4,16 @@
     src: wordpress
     dest: /var/www
 
+- name: Chown directory
+  file:
+    path: /var/www/wordpress
+    recurse: yes
+    owner: www-data
+    group: www-data
+
 - name: Copy wordpress conf
-  copy:
-    src: wordpress.conf
+  template:
+    src: wordpress
     dest: /etc/nginx/sites-available/wordpress
 
 - name: Enable wordpress

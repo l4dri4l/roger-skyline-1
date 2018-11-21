@@ -3,3 +3,15 @@
   synchronize:
     src: phpmyadmin
     dest: /var/www
+
+- name: Chown directory
+  file:
+    path: /var/www/phpmyadmin
+    recurse: yes
+    owner: www-data
+    group: www-data
+
+- name: Install dependencies
+  apt:
+    name: php-gettext
+    state: latest
