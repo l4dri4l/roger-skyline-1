@@ -18,7 +18,7 @@ iptables -A INPUT -s 127.0.0.0/8 -d 127.0.0.0/8 -i lo -j ACCEPT
 iptables -A INPUT -p tcp --dport 62222 -m state --state NEW -m limit --limit 2/second --limit-burst 2 -j ACCEPT
 
 # Allow HTTP AND HTTPS connections
-iptables -A INPUT -p tcp --dport 80 -m state --state NEW -m limit --limit 10/second --limit-burst 5 -j ACCEPT
-iptables -A INPUT -p tcp --dport 81 -m state --state NEW -m limit --limit 10/second --limit-burst 5 -j ACCEPT
-iptables -A INPUT -p tcp --dport 443 -m state --state NEW -m limit --limit 10/second --limit-burst 5 -j ACCEPT
-iptables -A INPUT -p tcp --dport 444 -m state --state NEW -m limit --limit 10/second --limit-burst 5 -j ACCEPT
+iptables -A INPUT -p tcp --dport 8080 -m state --state NEW -m limit --limit 10/second --limit-burst 5 -j ACCEPT
+iptables -A INPUT -p tcp --dport 8081 -m state --state NEW -m limit --limit 10/second --limit-burst 5 -j ACCEPT
+iptables -A INPUT -p tcp --dport 4443 -m state --state NEW -m limit --limit 10/second --limit-burst 5 -j ACCEPT
+iptables -A INPUT -p tcp --dport 4444 -m state --state NEW -m limit --limit 10/second --limit-burst 5 -j ACCEPT

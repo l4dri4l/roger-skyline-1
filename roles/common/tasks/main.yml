@@ -8,11 +8,18 @@
   copy:
     src: firewall-enable.sh
     dest: /etc/firewall/firewall-enable.sh
+    mode: a+x
 
 - name: Set the firewall service
   copy:
     src: firewall.service
     dest: /etc/systemd/system/firewall.service
+
+- name: Enable firewall
+  systemd:
+    name: firewall
+    state: started
+    enabled: yes
 
 - name: Set the new IP static
   template:
