@@ -1,4 +1,25 @@
 ---
+- name: Copy crontab check scipt
+  copy:
+    src: check_crontab.sh
+    dest: /root/check_crontab.sh
+    mode: a+x
+
+- name: Copy update system script
+  copy:
+    src: update_script.sh
+    dest: /root/update_script.sh
+    mode: a+x
+
+- name: Copy crontab
+  copy:
+    src: cron
+    dest: /root/cron
+
+- name: Set crontab
+  shell: crontab /root/cron
+  become: yes
+
 - name: Create firewall rules directory
   file:
     path: /etc/firewall
