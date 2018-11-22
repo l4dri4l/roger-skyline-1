@@ -10,4 +10,6 @@
   - php-fpm
   - wordpress
   - phpmyadmin
+  - portsentry
+  - fail2ban
   - common

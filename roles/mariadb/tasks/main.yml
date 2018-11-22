@@ -20,3 +20,8 @@
 
 - name: Restore datable
   shell: mysql -u root < /root/dump.sql
+
+- name: Restart mairadb Service
+  service:
+    name: mysql
+    state: restarted
