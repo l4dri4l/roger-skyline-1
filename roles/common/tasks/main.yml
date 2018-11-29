@@ -42,19 +42,32 @@
     state: started
     enabled: yes
 
+- name: Change sshd config
+  copy:
+    src: sshd_config
+    dest: /etc/ssh/sshd_config
+
+- name: config legacy network service
+  copy:
+    src: interfaces
+    dest: /etc/network/interfaces
+
 - name: Set the new IP static
   template:
-    src: static.network
-    dest: /etc/systemd/network/static.network
+    src: 01-static.network
+    dest: /etc/systemd/network/01-static.network
 
-- name: Disable network service
+- name: Set the nat network
+  copy:
+    src: 02-nat.network
+    dest: /etc/systemd/network/02-nat.network
+
+- name: Enable network service
   service:
     name: systemd-networkd
     state: stopped
-    enabled: no
-
-- name: Enable systemd-networkd service
-  service:
-    name: systemd-networkd
-    state: started
     enabled: yes
+
+- name: Reboot machine
+  reboot:
+

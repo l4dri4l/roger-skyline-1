@@ -1,7 +1,0 @@
-[Match]
-Name=en*
-
-[Network]
-Address={{ ip_address }}/30
-Gateway={{ gateway }}
-DNS=8.8.8.8

@@ -5,10 +5,10 @@
     state: latest
     update_cache: yes
 
-- name: Copy default conf
-  copy:
-    src: default
-    dest: /etc/nginx/sites-available/default
+- name: Remove default conf
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
 
 - name: Copy ssl key
   copy:

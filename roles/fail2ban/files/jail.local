@@ -12,7 +12,7 @@ port = 62222
 
 [nginx-req-limit]
 enabled = true
-port = 8080,8081,4443,4444
+port = 8080,4443
 logpath = /var/log/nginx/*error.log
 findtime = 600
 bantime = 7200

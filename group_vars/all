@@ -1,7 +1,7 @@
 ---
 # network configuration
-ip_address: 10.10.20.3
-gateway: 10.10.20.2
+ip_address: 10.10.20.2
+gateway: 10.10.20.1
 
 # nginx conf
-host_ip_address: 10.10.20.1
+host_ip_address: 10.12.20.2
