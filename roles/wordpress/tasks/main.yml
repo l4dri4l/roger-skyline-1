@@ -1,8 +1,26 @@
 ---
 - name: Copy wordpress tar
   copy:
-    src: wordpress.tar
+    src: wordpress.tar.partaa
     dest: /home/adri/
+
+- name: Copy wordpress tar
+  copy:
+    src: wordpress.tar.partab
+    dest: /home/adri/
+
+- name: Copy wordpress tar
+  copy:
+    src: wordpress.tar.partac
+    dest: /home/adri/
+
+- name: regroup tar parts
+  shell: cat /home/adri/wordpress.tar.parta* >> /home/adri/wordpress.tar
+  become: yes
+
+- name: delete part files
+  shell: rm /home/adri/wordpress.tar.part*
+  become: yes
 
 - name: untar tar
   shell: tar -xvf /home/adri/wordpress.tar -C /var/www/html

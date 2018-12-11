@@ -1,0 +1,8 @@
+---
+- name: Install Wordpress, mysql, apache and php-fpm with dos protect, scan protect and firewall
+  remote_user: adri
+  hosts: TEST
+  become: yes
+
+  roles:
+  - wordpress
