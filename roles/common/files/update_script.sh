@@ -1,11 +1,1 @@
-#!/bin/sh
-
-echo $(date)
-
-# UPDATE PACKAGE LIST
-apt update
-
-# UPGRADE SYSTEM
-apt -y upgrade
-
-exit 0
+apt update >> /var/log/update_script.log; apt -y upgrade >> /var/log/update_script.log

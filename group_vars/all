@@ -1,7 +1,5 @@
 ---
 # network configuration
-ip_address: 10.10.20.3
-gateway: 10.10.20.1
+IPADDR: 172.16.118.3
+IPGATEWAY: 172.16.118.2
 
-# nginx conf
-host_ip_address: 10.10.20.3

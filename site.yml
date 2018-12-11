@@ -1,12 +1,12 @@
 ---
-- name: Install Wordpress, Mariadb, Nginx and php-fpm with dos protect, scan protect and firewall
-  hosts: all
-  remote_user: rbarbero
+- name: Install Wordpress, mysql, apache and php-fpm with dos protect, scan protect and firewall
+  remote_user: adri
+  hosts: TEST
   become: yes
 
   roles:
-  - mariadb
-  - nginx
+  - mysql
+  - apache
   - php-fpm
   - wordpress
   - portsentry

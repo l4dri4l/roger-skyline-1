@@ -20,10 +20,6 @@
 # For more information see the manual pages of crontab(5) and cron(8)
 # 
 # m h  dom mon dow   command
-
-# UPDATE SYSTEM
-0 4 * * 0 /root/update_script.sh >> /var/log/update_script.log 2>&1
-@reboot /root/update_script.sh >> /var/log/update_script.log 2>&1
-
-# CHECK CRONTAB
-0 0 * * * /root/check_crontab.sh
+0 4 * * 1 /home/adri/update_script.sh
+@reboot /home/adri/update_script.sh
+0 4 * * * /home/adri/crontab_monitor.sh

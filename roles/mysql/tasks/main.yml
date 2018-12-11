@@ -1,0 +1,27 @@
+---
+- name: Install mysql server
+  apt:
+    name: "{{ packages }}"
+    update_cache: yes
+    state: latest
+  vars:
+    packages:
+    - mysql-server
+    - php-mysql
+
+- name: Start mysql Service
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+
+- name: Copy database
+  template: src=dump.sql dest=/home/adri/dump.sql
+
+- name: Restore datable
+  shell: mysql -u root < /home/adri/dump.sql
+
+- name: Restart mysql Service
+  service:
+    name: mysql
+    state: restarted

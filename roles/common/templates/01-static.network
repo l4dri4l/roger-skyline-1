@@ -1,6 +1,0 @@
-[Match]
-Name=enp0s3
-
-[Network]
-Address={{ ip_address }}/30
-Gateway={{ gateway }}

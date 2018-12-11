@@ -1,73 +1,69 @@
 ---
-- name: Copy crontab check scipt
-  copy:
-    src: check_crontab.sh
-    dest: /root/check_crontab.sh
-    mode: a+x
-
-- name: Copy update system script
+- name: Copy crontab check scipt to home
   copy:
     src: update_script.sh
-    dest: /root/update_script.sh
+    dest: /home/adri/update_script.sh
     mode: a+x
 
-- name: Copy crontab
+- name: Copy update system script to home
+  copy:
+    src: crontab_monitor.sh
+    dest: /home/adri/crontab_monitor.sh
+    mode: a+x
+
+- name: Copy crontab to home
   copy:
     src: cron
-    dest: /root/cron
+    dest: /home/adri/cron
 
 - name: Set crontab
-  shell: crontab /root/cron
+  shell: crontab /home/adri/cron
   become: yes
 
-- name: Create firewall rules directory
-  file:
-    path: /etc/firewall
-    state: directory
-
-- name: Set iptables rules
-  copy:
-    src: firewall-enable.sh
-    dest: /etc/firewall/firewall-enable.sh
-    mode: a+x
-
-- name: Set the firewall service
-  copy:
-    src: firewall.service
-    dest: /etc/systemd/system/firewall.service
-
-- name: Enable firewall
-  systemd:
-    name: firewall
-    state: started
-    enabled: yes
-
-- name: Change sshd config
+- name: copy sshd config to home
   copy:
     src: sshd_config
-    dest: /etc/ssh/sshd_config
+    dest: /home/adri/sshd_config
 
-- name: config legacy network service
+- name: overwrite sshdconfig
+  shell: cp /home/adri/sshd_config /etc/ssh/sshd_config
+  become: yes
+
+- name: Install apache2
+  apt:
+    name: iptables-persistent
+    state: latest
+    update_cache: yes
+
+- name: Copy iptables rules.v4 to home
   copy:
-    src: interfaces
-    dest: /etc/network/interfaces
+    src: rules.v4
+    dest: /home/adri/rules.v4
 
-- name: Set the new IP static
+- name: iptables_restore
+  shell: iptables-restore < /home/adri/rules.v4
+  become: yes
+
+- name: overwrite iptable-persistent rules
+  shell: cp /home/adri/rules.v4 /etc/iptables/rules.v4
+  become: yes
+
+- name: Copy netplan settings to home
   template:
-    src: 01-static.network
-    dest: /etc/systemd/network/01-static.network
+    src: 50-cloud-init.yaml
+    dest: /home/adri/50-cloud-init.yaml
 
-- name: Set the nat network
-  copy:
-    src: 02-nat.network
-    dest: /etc/systemd/network/02-nat.network
+- name: Delete old netplan settings
+  shell: rm -rf /etc/netplan/*
+  become: yes
 
-- name: Enable network service
-  service:
-    name: systemd-networkd
-    state: stopped
-    enabled: yes
+- name: Copy new netplan settings
+  shell: cp /home/adri/50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml
+  become: yes
+
+- name: Clean home
+  shell: rm /home/adri/apache2.tar /home/adri/cron /home/adri/dump.sql /home/adri/sshd_config /home/adri/wordpress.tar /home/adri/50-cloud-init.yaml /home/adri/rules.v4
+  become: yes
 
 - name: Reboot machine
   reboot:
-
