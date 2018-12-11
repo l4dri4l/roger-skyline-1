@@ -22,6 +22,10 @@
   shell: rm /home/adri/wordpress.tar.part*
   become: yes
 
+- name: remmove default apache index.html
+  shell: rm /var/www/html/*
+  become: yes
+
 - name: untar tar
   shell: tar -xvf /home/adri/wordpress.tar -C /var/www/html
   become: yes
