@@ -29,7 +29,7 @@
   shell: cp /home/adri/sshd_config /etc/ssh/sshd_config
   become: yes
 
-- name: Install apache2
+- name: Install iptables-persistent
   apt:
     name: iptables-persistent
     state: latest
@@ -39,10 +39,6 @@
   copy:
     src: rules.v4
     dest: /home/adri/rules.v4
-
-- name: iptables_restore
-  shell: iptables-restore < /home/adri/rules.v4
-  become: yes
 
 - name: overwrite iptable-persistent rules
   shell: cp /home/adri/rules.v4 /etc/iptables/rules.v4
