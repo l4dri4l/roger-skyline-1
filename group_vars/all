@@ -1,5 +1,5 @@
 ---
 # network configuration
-IPADDR: 172.16.21.3
-IPGATEWAY: 172.16.21.2
+IPADDR: 192.168.118.3
+IPGATEWAY: 192.168.118.2
 

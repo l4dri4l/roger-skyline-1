@@ -1,19 +1,20 @@
 [DEFAULT]
-bantime = 3600
+bantime = 10
+
+[apache]
+
+enabled  = true
+port     = http,https
+filter   = apache-auth
+logpath  = /var/log/apache*/*error.log
+maxretry = 6
 
 [sshd]
 enabled = true
-port = 62222
+port = 20
 maxentry = 3
 
 [sshd-ddos]
 enabled = true
-port = 62222
+port = 20
 
-[nginx-req-limit]
-enabled = true
-port = 8080,4443
-logpath = /var/log/nginx/*error.log
-findtime = 600
-bantime = 7200
-maxretry = 10

@@ -9,6 +9,11 @@
     src: portsentry.conf
     dest: /etc/portsentry/portsentry.conf
 
+- name: Copy config of portsentry
+  copy:
+    src: portsentry
+    dest: /etc/default/portsentry
+
 - name: Restart portsentry service
   systemd:
     name: portsentry

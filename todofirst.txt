@@ -9,14 +9,21 @@ root    ALL=(ALL:ALL) ALL
 # Members of the admin group may gain root privileges
 %admin  ALL=(ALL) NOPASSWD:ALL
 
+install python
+install mailutils
+
 ----- SUR LE CLIENT -----
 ssh-copy-id user@ip
 
 Modifier ./group_vars/all avec l'ip qui va bien (*.*.*.3) et la gateway (*.*.*.2)
 modifier ./inventory avec l'ip actuelle de la VM
 MAJ le DYN dreamseller.adri.cc
-ansible-playbook -u adri -k ./site.yml -i ./inventory
+ansible-playbook -u adri -k ./site.yml -i ./inventory --ask-become-pass
 
+----- UNBAN ----
+iptables -D INPUT 1 (ou num de regle)
+/etc/hosts.deny
+ip route -> si dedans -> ip route del 192.168.118.1
 
 
 
@@ -33,4 +40,36 @@ ansible-playbook -u adri -k ./site.yml -i ./inventory
 	sudo systemctl restart sshd
 
 	----
+
+--------NOTES-------
+
+-- NETWORK --
+
+/etc/network -> ancien truc avec init. Conservé pour legacy et pour local loopback
+man systemd-networkd -> man du network via systemd
+systemctl restart systemd-networkd -> pour restart le network via systemd
+/etc/systemd/network/ dossier avec la config avec systemd
+
+*********************************
+	NOUVEAU TRUC UBUNTU SERVER	*
+		/etc/netplan/*.yaml		*
+		sudo netplan apply		*
+*********************************
+
+ --FAIL2BAN--
+
+https://www.supinfo.com/articles/single/2660-proteger-votre-vps-apache-avec-fail2ban
+
+https://www.digitalocean.com/community/tutorials/how-to-protect-an-apache-server-with-fail2ban-on-ubuntu-14-04
+
+UNBAN    fail2ban-client set YOURJAILNAMEHERE unbanip IPADDRESSHERE
+ 
+ --SSH --
+ port 20
+ /etc/ssh/sshd_config -> config serveur SSH
+
+ --iptables--
+ https://wiki.debian.org/iptables
+ iptables-persistent
+ iptables-restore < /etc/iptables/rules.v4
 
